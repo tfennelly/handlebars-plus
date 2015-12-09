@@ -1,6 +1,6 @@
 {
   "name": "handlebars-plus",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Handlebars Templating Engine extension utilities",
   "main": "index.js",
   "repository": {

@@ -14,10 +14,10 @@
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.0",
-    "handlebars": "^4.0.5",
-    "jenkins-js-builder": "0.0.36"
+    "jenkins-js-builder": "0.0.36",
+    "lodash": "^3.10.1"
   },
   "dependencies": {
-    "lodash": "^3.10.1"
+    "handlebars": "^4.0.5"
   }
 }

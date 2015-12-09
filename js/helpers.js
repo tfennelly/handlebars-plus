@@ -1,6 +1,6 @@
 var handlebars = require('handlebars');
 
-registerHelers(handlebars, require('lodash'));
+registerHelers(handlebars);
 module.exports = handlebars;
 
 
@@ -9,23 +9,24 @@ module.exports = handlebars;
  * License: MIT
  */
 
-function registerHelers(Handlebars, _) {
+function registerHelers(Handlebars) {
   'use strict';
 
+  var lodash_util = require('./lodash_util.js');
   var module = Handlebars;
 
   // TODO: Add this to Handlebars.Utils(?)...
   function isBlockHelper(options) {
-    var keys = _.keys(options);
-    return (_.include(keys, 'inverse') && _.include(keys, 'fn'));
+    var keys = lodash_util.keys(options);
+    return (lodash_util.include(keys, 'inverse') && lodash_util.include(keys, 'fn'));
   }
 
   // IMPORTANT: Only use with call(), apply() or bind()
   function genericDualHelper(options, func) {
     /*jshint validthis:true */
-    var output, hash = options.hash, hashKeys = _.keys(hash),
-      ifFalse = isBlockHelper(options) ? options.inverse(this) : (_.include(hashKeys, 'ifFalse') ? hash.ifFalse : ''),
-      ifTrue = isBlockHelper(options) ? options.fn(this) : (_.include(hashKeys, 'ifTrue') ? hash.ifTrue : '');
+    var output, hash = options.hash, hashKeys = lodash_util.keys(hash),
+      ifFalse = isBlockHelper(options) ? options.inverse(this) : (lodash_util.include(hashKeys, 'ifFalse') ? hash.ifFalse : ''),
+      ifTrue = isBlockHelper(options) ? options.fn(this) : (lodash_util.include(hashKeys, 'ifTrue') ? hash.ifTrue : '');
 
     output = func.call(this) ? ifTrue : ifFalse;
 
@@ -49,13 +50,13 @@ function registerHelers(Handlebars, _) {
    */
   module.registerHelper('toString', function (context, options) {
     var replaceWith = options.hash.replaceWith;
-    var output = (!Handlebars.Utils.isEmpty(replaceWith) && _.isString(replaceWith)) ? replaceWith : '';
-    if ((!Handlebars.Utils.isEmpty(context) && !_.isEmpty(context)) || _.isNumber(context)) {
-        if (_.isString(context)) {
+    var output = (!Handlebars.Utils.isEmpty(replaceWith) && lodash_util.isString(replaceWith)) ? replaceWith : '';
+    if ((!Handlebars.Utils.isEmpty(context) && !lodash_util.isEmpty(context)) || lodash_util.isNumber(context)) {
+        if (lodash_util.isString(context)) {
             if (!(/^\s+$/).test(context)) {
                 output = context;
             }
-        } else if (_.isNumber(context)) {
+        } else if (lodash_util.isNumber(context)) {
             output = context.toString();
         }
     }
@@ -165,16 +166,16 @@ function registerHelers(Handlebars, _) {
   module.registerHelper('has', function (context, propertyName, options) {
     return genericDualHelper.call(this, options, function () {
         var output = false;
-        if (_.isObject(context)) {
-            if (_.isArray(context)) {
-                var result = _.find(context, function (element) {
+        if (lodash_util.isObject(context)) {
+            if (lodash_util.isArray(context)) {
+                var result = lodash_util.find(context, function (element) {
                     return element === propertyName;
                 });
 
-                if (!_.isUndefined(result)) {
+                if (!lodash_util.isUndefined(result)) {
                     output = true;
                 }
-            } else if (_.has(context, propertyName)) {
+            } else if (lodash_util.has(context, propertyName)) {
                 output = true;
             }
         }
@@ -237,13 +238,13 @@ function registerHelers(Handlebars, _) {
     return genericDualHelper.call(this, options, function () {
         var output = false;
 
-        if (_.isString(context) || _.isArray(context)) {
+        if (lodash_util.isString(context) || lodash_util.isArray(context)) {
             context = context.length;
-        } else if (_.isObject(context)) {
-            context = _.keys(context).length;
+        } else if (lodash_util.isObject(context)) {
+            context = lodash_util.keys(context).length;
         }
 
-        if (!_.isNaN(context) && _.isNumber(context) && _.isFinite(context)) {
+        if (!lodash_util.isNaN(context) && lodash_util.isNumber(context) && lodash_util.isFinite(context)) {
             if (context > compareObject) {
                 output = true;
             }
@@ -294,13 +295,13 @@ function registerHelers(Handlebars, _) {
     return genericDualHelper.call(this, options, function () {
         var output = false;
 
-        if (_.isString(context) || _.isArray(context)) {
+        if (lodash_util.isString(context) || lodash_util.isArray(context)) {
             context = context.length;
-        } else if (_.isObject(context)) {
-            context = _.keys(context).length;
+        } else if (lodash_util.isObject(context)) {
+            context = lodash_util.keys(context).length;
         }
 
-        if (!_.isNaN(context) && _.isNumber(context) && _.isFinite(context)) {
+        if (!lodash_util.isNaN(context) && lodash_util.isNumber(context) && lodash_util.isFinite(context)) {
             if (context >= compareObject) {
                 output = true;
             }
@@ -351,13 +352,13 @@ function registerHelers(Handlebars, _) {
     return genericDualHelper.call(this, options, function () {
         var output = false;
 
-        if (_.isString(context) || _.isArray(context)) {
+        if (lodash_util.isString(context) || lodash_util.isArray(context)) {
             context = context.length;
-        } else if (_.isObject(context)) {
-            context = _.keys(context).length;
+        } else if (lodash_util.isObject(context)) {
+            context = lodash_util.keys(context).length;
         }
 
-        if (!_.isNaN(context) && _.isNumber(context) && _.isFinite(context)) {
+        if (!lodash_util.isNaN(context) && lodash_util.isNumber(context) && lodash_util.isFinite(context)) {
             if (context < compareObject) {
                 output = true;
             }
@@ -408,13 +409,13 @@ function registerHelers(Handlebars, _) {
     return genericDualHelper.call(this, options, function () {
         var output = false;
 
-        if (_.isString(context) || _.isArray(context)) {
+        if (lodash_util.isString(context) || lodash_util.isArray(context)) {
             context = context.length;
-        } else if (_.isObject(context)) {
-            context = _.keys(context).length;
+        } else if (lodash_util.isObject(context)) {
+            context = lodash_util.keys(context).length;
         }
 
-        if (!_.isNaN(context) && _.isNumber(context) && _.isFinite(context)) {
+        if (!lodash_util.isNaN(context) && lodash_util.isNumber(context) && lodash_util.isFinite(context)) {
             if (context <= compareObject) {
                 output = true;
             }

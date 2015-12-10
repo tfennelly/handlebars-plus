@@ -1,3 +1,8 @@
+/*
+ * https://github.com/prototypef/handlebars-extensions uses lodash, which is a beast (in terms of size).
+ * This modules contains just the bits used by https://github.com/prototypef/handlebars-extensions.
+ */
+
 var MAX_SAFE_INTEGER = 9007199254740991;
 var reIsUint = /^\d+$/;
 var reIsPlainProp = /^\w*$/;

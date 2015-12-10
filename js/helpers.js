@@ -1,15 +1,8 @@
-var handlebars = require('handlebars');
-
-registerHelers(handlebars);
-module.exports = handlebars;
-
-
 /*
  * The following code is thanks to https://github.com/prototypef/handlebars-extensions
  * License: MIT
  */
-
-function registerHelers(Handlebars) {
+exports.registerHelpers = function(Handlebars) {
   'use strict';
 
   var lodash_util = require('./lodash_util.js');
@@ -424,4 +417,4 @@ function registerHelers(Handlebars) {
         return output;
     });
   });
-}
+};

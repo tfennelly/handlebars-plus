@@ -1,5 +1,7 @@
-var Handlebars = require('../js/helpers.js');
+var Handlebars = require('handlebars');
 var _ = require('lodash');
+
+require('../index.js').registerHelpers(Handlebars);
 
 /*
  * The following code is thanks to https://github.com/prototypef/handlebars-extensions

@@ -1,6 +1,6 @@
 {
   "name": "handlebars-plus",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Handlebars Templating Engine extension utilities",
   "main": "index.js",
   "repository": {
@@ -15,9 +15,7 @@
   "devDependencies": {
     "gulp": "^3.9.0",
     "jenkins-js-builder": "0.0.36",
+    "handlebars": "^4.0.5",
     "lodash": "^3.10.1"
-  },
-  "dependencies": {
-    "handlebars": "^4.0.5"
   }
 }
